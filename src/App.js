@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+// 라우팅을 하려면 Route를 가져와야겠죠! 가져옵니다.
+// ** 앗? BrowserRouter로 감싸주어야 하는데, BrowserRouter는 어디에 있나요? => index.js에 있어요 :)
+import { Route } from "react-router-dom";
+
+// 각 페이지에 해당하는 컴포넌트를 import!
+import Main from "./Main";
+import Review from "./Review";
+import {db} from "./firebase"
 
 function App() {
+  // const [s, setS] = React.useState();
+
+  // console.log("in app", s);
+
+  // React.useEffect(() => {
+  //   console.log("a did?");
+  // }, [s]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* exact는 왜 써줬을까요? 헷갈린다면 아래의 exact를 지우고 상세페이지(~~~/review/월)로 이동해서 확인해보기! */}
+      <Route path="/" exact>
+        <Main />
+      </Route>
+      <Route path="/review/:week_day" exact>
+        <Review />
+      </Route>
     </div>
   );
 }
